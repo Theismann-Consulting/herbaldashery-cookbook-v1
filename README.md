@@ -1,6 +1,5 @@
 # Herbaldashery Cookbook
 
-## Trello Board
 [Trello Board](https://trello.com/b/Jvr4tiYD/p2-cookbook)
 
 [Wireframe](https://xd.adobe.com/view/f04440a6-93ea-423a-4287-30b038dc92f4-8675/)
