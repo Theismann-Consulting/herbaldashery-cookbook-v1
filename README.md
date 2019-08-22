@@ -4,4 +4,4 @@
 
 [Wireframe](https://xd.adobe.com/view/f04440a6-93ea-423a-4287-30b038dc92f4-8675/)
 
-[ERD](https://www.lucidchart.com/invitations/accept/64cad1f6-fd30-4c3c-b6a4-1edb9558d900)
+[ERD](https://www.lucidchart.com/documents/view/a65e26ed-48ac-495c-9ff5-c42cf71e291d/0_0)
