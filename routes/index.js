@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const usersCtrl = require('../controllers/users');
 
-router.get('/', function(req, res) {
-    res.redirect('/users');
-});
+router.get('/', usersCtrl.index);
 
 router.get('/auth/google', passport.authenticate(
     'google', { scope: ['profile', 'email'] }
