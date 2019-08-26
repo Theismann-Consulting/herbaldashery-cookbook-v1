@@ -1,33 +1,20 @@
 <%- include('../partials/header') %>
 <div class="row">
-    <div id="recipes" class="col s12">
-      <% recipes.forEach(function(user, recipe) { %>
-        <div class="card blue-grey">
+    <div id="recipes" class="col s12 m6">
+      <% recipes.forEach(function(recipe) { %>
+        <div class="card blue-grey darken-1">
           <div class="card-content white-text">
-            <div>
-              <span class="card-title">
-                <% if (user.avatar) { %>
-                  <img src="<%= user.avatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
-                <% } else { %>
-                  <i class="small material-icons">perm_identity</i>
-                <% }; %>
-                  <span class="recipe-name"><%= recipe.name %></span>
-                  <span class="badge white"><%= recipe.category %></span>
-              </span>
-            </div>
-            <ul class="collection">
-              <% recipes.forEach(function(recipe) { %>
-                <li class="collection-item blue-grey-text text-darken-2">
-                <span class="title"><%- recipe.name %></span>
+              <span class="card-title"><%= recipe.name %></span>
+              <p><%= recipe.instructions %></p>
+                <div class="card-action">
+                  <span class="badge blue-grey lighten-1 white-text"><%= recipe.category %></span>
                   <% if (contributor.role === 'Admin') { %>
-                    <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST" class="secondary-content">
-                      <button type="submit" class="btn-small red-text">X</button>
+                    <form id="deleteRecipe" action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+                      <button type="submit" class="btn-small" >Delete Recipe</button>
                     </form>
                   <% }; %>
-                </li>
-              <% }); %>
-            </ul>
-          </div>
+                </div>
+            </div>
         </div>
       <% }); %>
     </div>

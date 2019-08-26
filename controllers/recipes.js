@@ -38,15 +38,15 @@ function newRecipe(req, res) {
 function create(req, res) {
     const recipe = new Recipe(req.body);
     recipe.contributor = req.user;
-    recipe.category = {
-      default: Unassigned,
-    }
     recipe.save(function(err) {
-        if (err) return res.render('recipes/new');
+      console.log(err);
+        if (err) {return res.render('recipes/new', {
+          contributor: req.user
+        })};
         console.log(recipe);
         res.redirect('/recipes');
     });
-}
+};
 
 function deleteRecipe(req, res, next) {
   console.log(req.params.id);

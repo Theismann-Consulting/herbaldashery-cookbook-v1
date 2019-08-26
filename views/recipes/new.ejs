@@ -6,7 +6,9 @@
   <label>Prep Time:</label>
   <input type="text" name="prepTime" required="/^\d{1,} min$/" placeholder="ex. 123 min">
   <label>Cook Time:</label>
-  <input type="text" name="cookTime" required="/^\d{1,} min$/" placeholder="ex. 136 min">>
+  <input type="text" name="cookTime" required="/^\d{1,} min$/" placeholder="ex. 136 min">
+  <label>Description:</label>
+  <input type="text" name="description" placeholder="Describe the dish!">
   <label>Instructions:</label>
   <input type="hidden" name="instructions">
   <div id="editor">
@@ -30,6 +32,13 @@
       placeholder: 'What steps are needed to make the recipe...',
       theme: 'snow',
     });
-  </script>
+
+    const form = document.querySelector('form');
+    form.onsubmit = function() {
+    const instructions = document.querySelector('input[name=instructions]');
+    console.log(quill.getContents());
+    instructions.value = quill.root.innerHTML;
+    };
+      </script>
 
 <%- include('../partials/footer') %>

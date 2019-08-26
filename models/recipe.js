@@ -18,7 +18,11 @@ const recipeSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
-    category: String,
+    category: {
+      type: String,
+      default: 'Unassigned',
+    },
+    description: String,
 }, {
     timestamps: true,
 });
