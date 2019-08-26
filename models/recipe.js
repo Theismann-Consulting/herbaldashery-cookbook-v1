@@ -17,7 +17,8 @@ const recipeSchema = new mongoose.Schema({
     contributor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-    }
+    },
+    category: String,
 }, {
     timestamps: true,
 });

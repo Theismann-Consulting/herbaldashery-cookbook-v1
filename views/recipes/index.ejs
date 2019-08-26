@@ -12,29 +12,21 @@
                   <i class="small material-icons">perm_identity</i>
                 <% }; %>
                   <span class="recipe-name"><%= recipe.name %></span>
-                  <span class="badge white">SEI <%= recipe.category %></span>
+                  <span class="badge white"><%= recipe.category %></span>
               </span>
             </div>
             <ul class="collection">
               <% recipes.forEach(function(recipe) { %>
                 <li class="collection-item blue-grey-text text-darken-2">
-                <span class="title"><%- fact.text %></span>
-                  <% if (users.role.equals(user && user.role)) { %>
-                    <form action="/facts/<%= fact._id %>?_method=DELETE" method="POST" class="secondary-content">
+                <span class="title"><%- recipe.name %></span>
+                  <% if (contributor.role === 'Admin') { %>
+                    <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST" class="secondary-content">
                       <button type="submit" class="btn-small red-text">X</button>
                     </form>
                   <% }; %>
                 </li>
               <% }); %>
             </ul>
-            <% if (users.role.equals(user && user.role)) { %>
-              <div class="card-action">
-                <form action="/facts" method="POST">
-                  <input type="text" name="text" class="white-text">
-                  <button type="submit" class="btn white-text">Add Fact</button>
-                </form>
-              </div>
-            <% }; %>
           </div>
         </div>
       <% }); %>
