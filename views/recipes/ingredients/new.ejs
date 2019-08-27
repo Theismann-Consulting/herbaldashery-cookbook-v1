@@ -1,0 +1,36 @@
+<%- include('../../partials/header') %>
+
+  <label>Recipe Name:</label>
+  <%= recipe.name %><br>
+  <label> Category</label>
+  <%= recipe.category %><br>
+  <label>Prep Time:</label>
+  <%= recipe.prepTime %>
+  <label>Cook Time:</label>
+  <%= recipe.cookTime %><br>
+  <label>Description:</label>
+  <p><%= recipe.description %></p>
+  <label>Instructions:</label>
+  <%- recipe.instructionsHtml %>
+  <label> Ingredients:</label>
+  <!-- insert current ingredients and post each new ingredient with + -->
+  <form id="ingredientsForm" action="/recipes/ingredients" method="POST"></form>
+  <table id="ingredients">
+    <tr>
+      <td><input type="text" name="measure"></td>
+      <td><input type="text" name="ingredient"></td>
+      <td><button id="addIngredient">+</button><button id="removeIngredient">-</button></td>
+    </tr>
+
+
+
+
+  </table>
+  <input type="submit" value="Submit Recipe">
+</form>
+
+<script>
+
+</script>
+
+<%- include('../../partials/footer') %>

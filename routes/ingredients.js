@@ -1,17 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const recipesCtrl = require('../controllers/recipes');
-const ingredientsRouter = require('./ingredients.js');
+const ingredientsCtrl = require('../controllers/ingredients');
 
-
-router.get('/', recipesCtrl.index);
-router.get('/ingredients', ingredientsRouter);
-router.get('/new', isContributor, recipesCtrl.new);
-router.get('/:id', recipesCtrl.show);
-router.get('/:id/edit', recipesCtrl.edit)
-router.post('/', recipesCtrl.create);
-router.put('/:id', recipesCtrl.update)
-router.delete('/:id', recipesCtrl.delete);
+router.post('/', ingredientsCtrl.create);
+router.put('/:id', ingredientsCtrl.update)
+router.delete('/:id', ingredientsCtrl.delete);
 
 function isLoggedIn(req, res, next) {
     console.log(req.user);

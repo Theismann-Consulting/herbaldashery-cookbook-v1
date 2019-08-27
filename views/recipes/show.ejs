@@ -20,11 +20,11 @@
       <thead>
         <tr>
           <th></th>
-          <th>Ingredient</th>
+          <th>Ingredients</th>
         </tr>
       </thead>
       <tbody>
-          <% recipe.ingredients.forEach(function(i) { %>
+          <% recipe.ingredients.keys(function(i) { %>
           <tr>
             <td><%= i.measurement %></td>
             <td><%= i.name %></td>

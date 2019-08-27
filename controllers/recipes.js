@@ -48,7 +48,10 @@ function create(req, res) {
         if (err) {return res.render('recipes/new', {
           contributor: req.user
         })};
-        res.redirect('/recipes');
+        res.render('recipes/ingredients/new',{
+        contributor: req.user,
+        recipe,
+        });
     });
 };
 
@@ -69,7 +72,10 @@ function edit(req, res){
 };
 
 function update(req, res) {
-  Recipe.updateOne({ _id: req.params.id }, req.body);
-  console.log(req.body);
-  res.redirect(`/recipes/${req.params.id}`);
+  Recipe.update({ _id: req.params.id }, req.body, function(err){
+    res.render('recipes/ingredients/edit',{
+      contributor: req.user,
+      recipe,
+      });
+  });
 };
