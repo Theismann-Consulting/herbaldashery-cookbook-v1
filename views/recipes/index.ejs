@@ -8,11 +8,7 @@
               <p><%= recipe.description %></p>
                 <div class="card-action">
                   <span class="badge blue-grey lighten-1 white-text"><%= recipe.category %></span>
-                  <% if (contributor.role === 'Admin') { %>
-                    <form id="deleteRecipe" action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
-                      <button type="submit" class="btn-small" >Delete Recipe</button>
-                    </form>
-                  <% }; %>
+                    <a href="/recipes/<%= recipe._id %>" class="btn-small" >Show Recipe</a>
                 </div>
             </div>
         </div>

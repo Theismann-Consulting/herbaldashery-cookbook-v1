@@ -25,7 +25,10 @@ function index(req, res) {
 
 function show(req, res) {
     Recipe.findById(req.params.id, function(err, recipe) {
-         res.render('recipe/show', { receipe });
+         res.render('recipes/show', { 
+          recipe,
+          contributor: req.user,
+         });
     });
 };
 

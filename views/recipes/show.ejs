@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+
+<div class="row">
+  <div class="col s12 m4 l8">
+    <div class="col s12 m4 l8">
+    <% if (contributor && contributor.role === 'Admin') { %>
+        <a href="./edit.ejs" class="btn-small left"> Edit Recipe</a>
+        <form class="right" id="deleteRecipe" action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+          <button type="submit" class="btn-small" >Delete Recipe</button>
+        </form>
+      <% }; %>
+    </div>
+    <div class="col s12 m4 l8">
+    <span class="badge blue-grey lighten-1 white-text"><%= recipe.category %></span>
+    <h3><%= recipe.name %></h3>
+    <p><%= recipe.description %></p>
+    <div class="col s12 m8 l3">
+    <table class="responsive">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Ingredient</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% recipe.ingredients.forEach(function(i) { %>
+          <tr>
+            <td><%= i.measurement %></td>
+            <td><%= i.name %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    </div>
+    </div>
+
+    
+  </div>
+</div>
+
+                
+<%- include('../partials/footer') %>

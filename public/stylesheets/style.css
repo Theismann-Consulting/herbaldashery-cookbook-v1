@@ -15,10 +15,6 @@
     top: -5px;
 }
 
-form {
+#new-form {
     margin: 10vmin;
-}
-
-#deleteRecipe {
-    text-align: center;
 }
