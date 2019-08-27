@@ -3,6 +3,8 @@
 <form id="new-form" action="/recipes" method="POST">
   <label>Recipe Name:</label>
   <input type="text" name="name">
+  <label> Category</label>
+  <input type="text" name="category">
   <label>Prep Time:</label>
   <input type="text" name="prepTime" required="/^\d{1,} min$/" placeholder="ex. 123 min">
   <label>Cook Time:</label>
@@ -11,6 +13,8 @@
   <input type="text" name="description" placeholder="Describe the dish!">
   <label>Instructions:</label>
   <input type="hidden" name="instructions">
+  <input type="hidden" name="instructionsHtml">
+  <input type="hidden" name="instructionsString">
   <div id="editor">
   </div>
   <!-- <label>Ingredients:</label>
@@ -36,8 +40,11 @@
     const form = document.querySelector('form');
     form.onsubmit = function() {
     const instructions = document.querySelector('input[name=instructions]');
-    console.log(quill.getContents());
-    instructions.value = quill.root.innerHTML;
+    const instructionsHtml = document.querySelector('input[name=instructionsHtml]');
+    const instructionsString = document.querySelector('input[name=instructionsString]');
+    instructions.value = JSON.stringify(quill.getContents());
+    instructionsHtml.value = quill.root.innerHTML;
+    instructionsString.value = quill.getText();
     };
       </script>
 

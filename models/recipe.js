@@ -13,6 +13,8 @@ const recipeSchema = new mongoose.Schema({
     prepTime: String,
     cookTime: String,
     instructions: String,
+    instructionsHtml: String,
+    instructionsString: String,
     ingredients: [ingredientsSchema],
     contributor: {
       type: mongoose.Schema.Types.ObjectId,

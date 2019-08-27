@@ -6,6 +6,8 @@ module.exports = {
     new: newRecipe,
     create,
     delete: deleteRecipe,
+    edit,
+    update,
 };
 
 function index(req, res) {
@@ -25,7 +27,7 @@ function index(req, res) {
 
 function show(req, res) {
     Recipe.findById(req.params.id, function(err, recipe) {
-         res.render('recipes/show', { 
+          res.render('recipes/show', { 
           recipe,
           contributor: req.user,
          });
@@ -46,7 +48,6 @@ function create(req, res) {
         if (err) {return res.render('recipes/new', {
           contributor: req.user
         })};
-        console.log(recipe);
         res.redirect('/recipes');
     });
 };
@@ -56,4 +57,19 @@ function deleteRecipe(req, res, next) {
   Recipe.deleteOne({ _id: req.params.id}, function(err) {
     res.redirect('/recipes');
   });
+};
+
+function edit(req, res){
+  Recipe.findById({ _id: req.params.id }, function(err, recipe){
+    res.render('recipes/edit', {
+      recipe,
+      contributor: req.user,
+    });
+  });
+};
+
+function update(req, res) {
+  Recipe.updateOne({ _id: req.params.id }, req.body);
+  console.log(req.body);
+  res.redirect(`/recipes/${req.params.id}`);
 };

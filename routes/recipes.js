@@ -6,10 +6,12 @@ router.get('/', recipesCtrl.index);
 
 router.get('/new', isContributor, recipesCtrl.new);
 router.get('/:id', recipesCtrl.show);
+router.get('/:id/edit', recipesCtrl.edit)
 
 router.post('/', recipesCtrl.create);
+router.put('/:id', recipesCtrl.update)
 
-router.delete('/:id', isAdmin, recipesCtrl.delete);
+router.delete('/:id', recipesCtrl.delete);
 
 function isLoggedIn(req, res, next) {
     console.log(req.user);
