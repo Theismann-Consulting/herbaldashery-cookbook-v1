@@ -13,7 +13,7 @@
   <label>Instructions:</label>
   <%- recipe.instructionsHtml %>
   <label> Ingredients:</label>
-  <% if (!recipe.ingredients === undefined) {
+  <% if (!recipe.ingredients === undefined) { %>
   <% recipe.ingredients.keys(function(i) { %>
     <tr>
       <form id="ingredientsForm" action="/recipes/ingredients/<%= i._id %>?_method=DELETE" method="POST">
@@ -24,7 +24,7 @@
       </tr>
     </tr>
   <% }); %>
-  <% }: %>
+  <% }; %>
   <form id="ingredientsForm" action="/recipes/ingredients" method="POST">
   <table id="ingredients">
     <tr>

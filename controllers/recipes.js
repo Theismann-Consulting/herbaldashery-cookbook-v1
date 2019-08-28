@@ -73,7 +73,7 @@ function edit(req, res){
 
 function update(req, res) {
   Recipe.update({ _id: req.params.id }, req.body, function(err, recipe){
-    res.render(`recipes/${req.params.id}/ingredients/new`,{
+    res.render(`recipes/ingredients/new`,{
       contributor: req.user,
       recipe,
       });
