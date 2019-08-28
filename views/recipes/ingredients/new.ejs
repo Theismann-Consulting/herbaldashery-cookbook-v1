@@ -13,8 +13,8 @@
   <label>Instructions:</label>
   <%- recipe.instructionsHtml %>
   <label> Ingredients:</label>
-  <% if (!recipe.ingredients === undefined) { %>
-  <% recipe.ingredients.keys(function(i) { %>
+  <% console.log(recipe.ingredients);  %>
+  <% recipe.ingredients.forEach(function(i) { console.log(i);%>
     <tr>
       <form id="ingredientsForm" action="/recipes/ingredients/<%= i._id %>?_method=DELETE" method="POST">
         <td><%= i.measurement %></td>
@@ -24,12 +24,14 @@
       </tr>
     </tr>
   <% }); %>
-  <% }; %>
-  <form id="ingredientsForm" action="/recipes/ingredients" method="POST">
+  <form id="ingredientsForm" action="/recipes/<%= recipe._id %>/ingredients" method="POST">
   <table id="ingredients">
     <tr>
-      <td><input type="text" name="measure"></td>
-      <td><input type="text" name="ingredient"></td>
+      <td><input type="text" name="amount" autocomplete="off"></td>
+      <td>
+        <input type="text" name="name" autocomplete="off">
+        <input type="hidden" name="recipe" value="<%= recipe._id %>">
+      </td>
       <td><input type="submit" value="Add Ingredient"></td>
     </tr>
   </table>

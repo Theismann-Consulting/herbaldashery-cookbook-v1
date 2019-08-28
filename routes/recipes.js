@@ -5,7 +5,6 @@ const ingredientsRouter = require('./ingredients.js');
 
 
 router.get('/', recipesCtrl.index);
-router.get('/ingredients', ingredientsRouter);
 router.get('/new', isContributor, recipesCtrl.new);
 router.get('/:id', recipesCtrl.show);
 router.get('/:id/edit', recipesCtrl.edit)

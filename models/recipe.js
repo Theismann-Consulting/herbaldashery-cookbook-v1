@@ -8,18 +8,18 @@ const recipeSchema = new mongoose.Schema({
     instructions: String,
     instructionsHtml: String,
     instructionsString: String,
-    ingredients: {
+    ingredients: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Ingredient',
-    },
+    }],
     contributor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
-    category: {
+    category: [{
       type: String,
       default: 'Unassigned',
-    },
+    }],
     description: String,
 }, {
     timestamps: true,

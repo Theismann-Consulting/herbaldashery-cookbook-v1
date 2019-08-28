@@ -1,4 +1,5 @@
 const Recipe = require('../models/recipe');
+const Ingredient = require('../models/ingredient');
 
 module.exports = {
     index,
@@ -27,10 +28,13 @@ function index(req, res) {
 
 function show(req, res) {
     Recipe.findById(req.params.id, function(err, recipe) {
+      Ingredient.find({ recipe: recipe._id }, function(err, ingredient){
           res.render('recipes/show', { 
           recipe,
           contributor: req.user,
+          ingredient,
          });
+      });
     });
 };
 
@@ -72,7 +76,7 @@ function edit(req, res){
 };
 
 function update(req, res) {
-  Recipe.update({ _id: req.params.id }, req.body, function(err, recipe){
+  Recipe.findByIdAndUpdate({ _id: req.params.id }, req.body, function(err, recipe){
     res.render(`recipes/ingredients/new`,{
       contributor: req.user,
       recipe,

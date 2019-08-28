@@ -1,4 +1,5 @@
 const Ingredient = require('../models/ingredient');
+const Recipe = require('../models/recipe');
 
 module.exports = {
     create,
@@ -9,16 +10,24 @@ module.exports = {
 
 
 function create(req, res) {
+  console.log(req.body);
     const ingredient = new Ingredient(req.body);
     ingredient.contributor = req.user;
-    ingredient.save(function(err) {
-      console.log(err);
+    console.log(ingredient);
+    ingredient.save(function(err, i) {
+      console.log(i);
         if (err) {return res.render('recipes/ingredients/new', {
           contributor: req.user
         })};
-        res.render('recipes/ingredients/new',{
-        contributor: req.user,
-        ingredient,
+        Recipe.findById(ingredient.recipe, function(err, recipe){
+          recipe.ingredients.push(i);
+          recipe.save(function(err){
+            console.log(recipe);
+            res.render('recipes/ingredients/new',{
+              contributor: req.user,
+              recipe,
+              });
+          });
         });
     });
 };
