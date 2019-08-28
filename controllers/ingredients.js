@@ -9,12 +9,6 @@ module.exports = {
 
 
 function create(req, res) {
-  Ingredient.findById(req.params.id, function(err, ingredient) {
-    ingredient.ingredients.push(req.body);
-    flight.save(function(err) {
-        res.redirect(`/recipes/${recipe._id}`);
-    });
-});
     const ingredient = new Ingredient(req.body);
     ingredient.contributor = req.user;
     ingredient.save(function(err) {

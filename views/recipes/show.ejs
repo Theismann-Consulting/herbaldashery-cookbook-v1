@@ -24,12 +24,14 @@
         </tr>
       </thead>
       <tbody>
-          <% recipe.ingredients.keys(function(i) { %>
+          <% if (!recipe.ingredients === undefined) { %>
+          <% recipe.ingredients.forEach(function(i) { %>
           <tr>
             <td><%= i.measurement %></td>
             <td><%= i.name %></td>
           </tr>
         <% }); %>
+        <% }; %>
       </tbody>
     </table>
     </div>

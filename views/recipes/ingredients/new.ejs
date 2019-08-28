@@ -13,21 +13,29 @@
   <label>Instructions:</label>
   <%- recipe.instructionsHtml %>
   <label> Ingredients:</label>
-  <!-- insert current ingredients and post each new ingredient with + -->
-  <form id="ingredientsForm" action="/recipes/ingredients" method="POST"></form>
+  <% if (!recipe.ingredients === undefined) {
+  <% recipe.ingredients.keys(function(i) { %>
+    <tr>
+      <form id="ingredientsForm" action="/recipes/ingredients/<%= i._id %>?_method=DELETE" method="POST">
+        <td><%= i.measurement %></td>
+        <td><%= i.name %></td>
+        <td><input type="submit" value="Delete Ingredient"></td>
+      </form>
+      </tr>
+    </tr>
+  <% }); %>
+  <% }: %>
+  <form id="ingredientsForm" action="/recipes/ingredients" method="POST">
   <table id="ingredients">
     <tr>
       <td><input type="text" name="measure"></td>
       <td><input type="text" name="ingredient"></td>
-      <td><button id="addIngredient">+</button><button id="removeIngredient">-</button></td>
+      <td><input type="submit" value="Add Ingredient"></td>
     </tr>
-
-
-
-
   </table>
-  <input type="submit" value="Submit Recipe">
 </form>
+  <a href="/recipe/<%= recipe._id %>"><button>Finished</button></a>
+
 
 <script>
 
