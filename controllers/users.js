@@ -49,7 +49,7 @@ function create(req, res, next){
 
 function edit(req, res){
     User.findById({ _id: req.params.id }, function(err, user){
-      res.render('user/edit', {
+      res.render('users/edit', {
         user,
         contributor: req.user,
       });
@@ -66,7 +66,7 @@ function edit(req, res){
 
   function deleteUser(req, res, next) {
     User.findByIdAndDelete(req.params.id, function(err) {
-        res.render('user/index', {
+        res.render('users/index', {
             contributor: req.user,
         });
     });
