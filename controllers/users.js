@@ -30,7 +30,7 @@ function show(req, res) {
 };
 
 function newUser(req, res) {
-    res.render('users/new', {
+    res.render('users/add', {
         contributor: req.user,
       });
 }
@@ -41,8 +41,7 @@ function create(req, res, next){
         if (err) {return res.render('users/new', {
             contributor: req.user
         })};
-        res.render('users/',{
-        contributor: req.user,
+        res.redirect('/users',{
         });
     });
 };
@@ -58,16 +57,12 @@ function edit(req, res){
 
   function update(req, res) {
     User.findByIdAndUpdate({ _id: req.params.id }, req.body, function(err, user){
-        res.render(`recipes/ingredients/index`,{
-        contributor: req.user,
-        });
+        res.redirect(`/users/${user._id}`);
     });
   };
 
   function deleteUser(req, res, next) {
     User.findByIdAndDelete(req.params.id, function(err) {
-        res.render('users/index', {
-            contributor: req.user,
-        });
+        res.redirect('/users');
     });
   };

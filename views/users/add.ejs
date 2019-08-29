@@ -6,10 +6,12 @@
   <label>Email:</label>
   <input type="text" name="email" autocomplete="off">
   <label>User Role:</label>
-    <input type="radio" name="role" value="User" checked><label for="User">User</label></div>
-    <input type="radio" name="role" value="Contributor" checked><label for="Contributor">Contributor</label></div>
-    <input type="radio" name="role" value="Admin" checked><label for="Admin">Admin (Do Not Use)</label></div>
-  <input type="submit" value="Next: Ingredients">
+  <div class="container">
+    <p><label><input class="with-gap" type="radio" name="role" value="User" checked /><span>User</span></label></p>
+    <p><label><input class="with-gap" type="radio" name="role" value="Contributor" /><span>Contributor</span></label></p>
+    <p><label><input class="with-gap" type="radio" name="role" value="Admin" /><span>Admin (Do Not Use)</span></label></p>
+  </div>
+  <input type="submit" class="btn-small left" value="Submit">
 </form>
 
 <%- include('../partials/footer') %>

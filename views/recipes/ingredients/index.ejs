@@ -19,7 +19,7 @@
       <form id="ingredientsForm" action="/ingredients/<%= i._id %>?_method=DELETE" method="POST">
         <td><%= i.amount %></td>
         <td><%= i.name %></td>
-        <td><input type="submit" value="Delete"></td>
+        <td><input type="submit" class="btn-small left" value="Delete"></td>
       </form>
       </tr>
     </tr>
@@ -33,10 +33,10 @@
         <input type="text" name="name" autocomplete="off">
         <input type="hidden" name="recipe" value="<%= recipe._id %>">
       </td>
-      <td><input type="submit" value="Add Ingredient"></td>
+      <td><input type="submit" class="btn-small left" value="Add Ingredient"></td>
     </tr>
   </table>
 </form>
-  <a href="/recipes/<%= recipe._id %>"><button>Finished</button></a>
+  <a class="btn-small left" href="/recipes/<%= recipe._id %>">Finished</a>
 
 <%- include('../../partials/footer') %>

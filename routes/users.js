@@ -3,8 +3,8 @@ const router = express.Router();
 const usersCtrl = require('../controllers/users');
 
 router.get('/', usersCtrl.index);
-router.get('/:id', usersCtrl.show);
 router.get('/add', usersCtrl.new);
+router.get('/:id', usersCtrl.show);
 router.get('/:id/edit', usersCtrl.edit);
 router.post('/', usersCtrl.create);
 router.put('/:id', usersCtrl.update);
