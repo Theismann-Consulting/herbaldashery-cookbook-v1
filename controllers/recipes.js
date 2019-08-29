@@ -81,7 +81,7 @@ function edit(req, res){
 };
 
 function update(req, res) {
-  Recipe.findByIdAndUpdate({ _id: req.params.id }, req.body, function(err, recipe){
+  Recipe.findByIdAndUpdate({ _id: req.params.id }, req.body, {new: true}, function(err, recipe){
     Ingredient.find({ recipe: recipe._id }, function(err, ingredients){
       res.render(`recipes/ingredients/index`,{
         contributor: req.user,
