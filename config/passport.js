@@ -8,10 +8,12 @@ passport.use(new GoogleStrategy({
         callbackURL: process.env.GOOGLE_CALLBACK
     },
     function(accessToken, refreshToken, profile, cb) {
-        User.findOne({ 'googleId': profile.id }, function(err, user) {
+        User.findOne({ 'email': profile._json.email }, function(err, user) {
             if (err) return cb(err);
             if (user) {
-                if (!user.avatar) {
+                if (!user.googleId) {
+                    user.name = profile.displayName,
+                    user.googleId = profile.id,
                     user.avatar = profile.photos[0].value;
                     user.save(function(err) {
                         return cb(null, user);
@@ -20,16 +22,7 @@ passport.use(new GoogleStrategy({
                     return cb(null, user);
                 }
             } else {
-                const newUser = new User({
-                    name: profile.displayName,
-                    email: profile.emails[0].value,
-                    googleId: profile.id,
-                    role: 'User',
-                });
-                newUser.save(function(err) {
-                    if (err) return cb(err);
-                    return cb(null, newUser);
-                });
+                return cb(null);
             }
         });
     }
