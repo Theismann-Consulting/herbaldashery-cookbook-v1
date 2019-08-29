@@ -41,8 +41,7 @@ function create(req, res, next){
         if (err) {return res.render('users/new', {
             contributor: req.user
         })};
-        res.redirect('/users',{
-        });
+        res.redirect('/users');
     });
 };
 
