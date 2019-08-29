@@ -28,11 +28,11 @@ function index(req, res) {
 
 function show(req, res) {
     Recipe.findById(req.params.id, function(err, recipe) {
-      Ingredient.find({ recipe: recipe._id }, function(err, ingredient){
+      Ingredient.find({ recipe: recipe._id }, function(err, ingredients){
           res.render('recipes/show', { 
           recipe,
           contributor: req.user,
-          ingredient,
+          ingredients,
          });
       });
     });
@@ -48,13 +48,15 @@ function create(req, res) {
     const recipe = new Recipe(req.body);
     recipe.contributor = req.user;
     recipe.save(function(err) {
-      console.log(err);
         if (err) {return res.render('recipes/new', {
           contributor: req.user
         })};
-        res.render('recipes/ingredients/new',{
-        contributor: req.user,
-        recipe,
+        Ingredient.find({ recipe: recipe._id }, function(err, ingredients){
+          res.render('recipes/ingredients/index',{
+          contributor: req.user,
+          recipe,
+          ingredients,
+          });
         });
     });
 };
@@ -77,9 +79,12 @@ function edit(req, res){
 
 function update(req, res) {
   Recipe.findByIdAndUpdate({ _id: req.params.id }, req.body, function(err, recipe){
-    res.render(`recipes/ingredients/new`,{
-      contributor: req.user,
-      recipe,
-      });
+    Ingredient.find({ recipe: recipe._id }, function(err, ingredients){
+      res.render(`recipes/ingredients/index`,{
+        contributor: req.user,
+        recipe,
+        ingredients,
+        });
+    });
   });
 };

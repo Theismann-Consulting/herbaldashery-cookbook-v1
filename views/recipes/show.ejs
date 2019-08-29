@@ -11,34 +11,34 @@
       <% }; %>
     </div>
     <div class="col s12 m10 l8">
-    <span class="badge blue-grey lighten-1 white-text"><%= recipe.category %></span>
-    <h3><%= recipe.name %></h3>
-    <h6>Description:</h6>
-    <p><%= recipe.description %></p>
-    <div class="col s6 m5 l4">
-    <table class="responsive">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Ingredients</th>
-        </tr>
-      </thead>
-      <tbody>
-          <% if (!recipe.ingredients === undefined) { %>
-          <% recipe.ingredients.forEach(function(i) { %>
+      <span class="badge blue-grey lighten-1 white-text"><%= recipe.category %></span>
+      <h3><%= recipe.name %></h3>
+      <h6>Description:</h6>
+      <p><%= recipe.description %></p>
+      <div class="col s6 m5 l4">
+      <table class="responsive">
+        <thead>
           <tr>
-            <td><%= i.measurement %></td>
-            <td><%= i.name %></td>
+            <th></th>
+            <th>Ingredients</th>
           </tr>
-        <% }); %>
-        <% }; %>
-      </tbody>
-    </table>
-    </div>
-    <div class="col s6 m5 l4"></div>
-    <h6>Instructions</h6>
-    <%- recipe.instructionsHtml %>
-    </div>
+        </thead>
+        <tbody>
+            <% if (ingredients !== undefined) { %>
+              <% ingredients.forEach(function(i) { %>
+              <tr>
+                <td><%= i.amount %></td>
+                <td><%= i.name %></td>
+              </tr>
+            <% }); %>
+          <% }; %>
+        </tbody>
+      </table>
+      </div>
+      <div class="col s6 m5 l4">
+      <h6>Instructions</h6>
+      <%- recipe.instructionsHtml %>
+      </div>
     </div>
 
     

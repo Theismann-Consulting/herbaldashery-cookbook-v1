@@ -12,6 +12,7 @@ router.post('/', recipesCtrl.create);
 router.put('/:id', recipesCtrl.update)
 router.delete('/:id', recipesCtrl.delete);
 
+
 function isLoggedIn(req, res, next) {
     console.log(req.user);
     if (req.isAuthenticated()) return next();
