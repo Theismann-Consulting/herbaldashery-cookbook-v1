@@ -15,18 +15,23 @@
   <label> Ingredients:</label>
   <% if (!ingredients || ingredients !== undefined) { %>
     <% ingredients.forEach(function(i) { %>
-    <tr>
+    <table>
       <form id="ingredientsForm" action="/ingredients/<%= i._id %>?_method=DELETE" method="POST">
-        <td><%= i.amount %></td>
-        <td><%= i.name %></td>
-        <td><input type="submit" class="btn-small left" value="Delete"></td>
+        <tr>
+            <td><%= i.amount %></td>
+            <td><%= i.name %></td>
+            <td><input type="submit" class="btn-small left" value="Delete"></td>
+        </tr>
       </form>
-      </tr>
-    </tr>
+    </table>
   <% }); %>
   <% }; %>
   <form id="ingredientsForm" action="/recipes/<%= recipe._id %>/ingredients" method="POST">
   <table id="ingredients">
+    <tr>
+      <th>Amount</th>
+      <th>Ingredient</th>
+    </tr>
     <tr>
       <td><input type="text" name="amount" autocomplete="off"></td>
       <td>

@@ -14,19 +14,16 @@ router.delete('/:id', recipesCtrl.delete, ingredientsCtrl.clean);
 
 
 function isLoggedIn(req, res, next) {
-    console.log(req.user);
     if (req.isAuthenticated()) return next();
     res.redirect('/auth/google');
 }
 
 function isAdmin(req, res, next) {
-    console.log(req.user);
     if (req.user.role === 'Admin') return next();
     res.redirect('/recipes');
 }
 
 function isContributor(req, res, next) {
-    console.log(req.user);
     if (req.user.role === 'Contributor' || req.user.role === 'Admin') return next();
     res.redirect('/recipes');
 }

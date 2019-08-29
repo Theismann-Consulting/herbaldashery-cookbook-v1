@@ -1,16 +1,16 @@
 <%- include('../partials/header') %>
 
 <form id="new-form" action="/recipes/<%= recipe._id %>?_method=PUT" method="POST" autocomplete="off">
-  <label>Recipe Name:</label>
   <input type="text" name="name" value="<%= recipe.name %>">
-  <label> Category</label>
+  <label>Recipe Name:</label>
   <input type="text" name="category" value="<%= recipe.category %>">
-  <label>Prep Time:</label>
+  <label> Category</label>
   <input type="text" name="prepTime" required="/^\d{1,} min$/" placeholder="ex. 123 min" value="<%= recipe.prepTime %>">
-  <label>Cook Time:</label>
+  <label>Prep Time:</label>
   <input type="text" name="cookTime" required="/^\d{1,} min$/" placeholder="ex. 136 min" value="<%= recipe.cookTime %>">
-  <label>Description:</label>
+  <label>Cook Time:</label>
   <input type="text" name="description" placeholder="Describe the dish!" value="<%= recipe.description %>">
+  <label>Description:</label>
   <label>Instructions:</label>
   <input type="hidden" name="instructions">
   <input type="hidden" name="instructionsHtml">

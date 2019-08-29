@@ -41,7 +41,11 @@ function create(req, res, next){
         if (err) {return res.render('users/new', {
             contributor: req.user
         })};
-        res.redirect('/users');
+        if (req.isAuthenticated()){
+          res.redirect('/users');
+        } else {
+          res.redirect('/');
+        }
     });
 };
 
