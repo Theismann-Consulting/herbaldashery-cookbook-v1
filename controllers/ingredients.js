@@ -4,7 +4,6 @@ const Recipe = require('../models/recipe');
 module.exports = {
     create,
     delete: deleteIngredient,
-    edit,
     update,
     clean,
 };
@@ -53,15 +52,6 @@ function clean(req, res, next){
     res.redirect('/recipes');
   });
 }
-
-function edit(req, res){
-  Ingredient.findById({ _id: req.params.id }, function(err, ingredient){
-    res.render('ingredients/edit', {
-      ingredient,
-      contributor: req.user,
-    });
-  });
-};
 
 function update(req, res) {
   Ingredient.update({ _id: req.params.id }, req.body, function(err){
