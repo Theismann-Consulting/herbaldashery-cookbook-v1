@@ -54,7 +54,7 @@ function deleteIngredient(req, res, next) {
 };
 
 function clean(req, res, next){
-  Ingredient.deleteMany({recipes: ''}, function (err) {
+  Ingredient.deleteMany({recipes: undefined}, function (err) {
     res.redirect('/recipes');
   });
 }
