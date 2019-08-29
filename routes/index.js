@@ -14,14 +14,20 @@ router.get('/auth/google', passport.authenticate(
 
 router.get('/oauth2callback', passport.authenticate(
     'google', {
-        successRedirect: '/recipes',
-        failureRedirect: '/recipes'
+        successRedirect: '/',
+        failureRedirect: '/login_failure'
     }
 ));
 
 router.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('users');
+    res.redirect('/');
+});
+
+router.get('/login_failure', function(req, res){
+    res.render('login_failure', {
+        contributor: req.user,
+    });
 });
 
 module.exports = router;
