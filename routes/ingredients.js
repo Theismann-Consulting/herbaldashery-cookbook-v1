@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const ingredientsCtrl = require('../controllers/ingredients');
 
-router.post('/', isContributor, ingredientsCtrl.create);
-router.put('/:id', isContributor, ingredientsCtrl.update)
-router.delete('/:id', isAdmin, ingredientsCtrl.delete);
+router.post('/', isLoggedin, isContributor, ingredientsCtrl.create);
+router.put('/:id', isLoggedin, isContributor, ingredientsCtrl.update)
+router.delete('/:id', isLoggedIn, isAdmin, ingredientsCtrl.delete);
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();

@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
     role: String,
     avatar: String,
     googleId: String,
+    active: {
+        type: Boolean,
+        default: true,
+    }
 }, {
     timestamps: true
 });
