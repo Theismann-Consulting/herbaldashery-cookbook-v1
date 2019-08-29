@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+
+<form id="new-form" action="/users" method="POST">
+  <label>Name:</label>
+  <input type="text" name="name" autocomplete="off">
+  <label>Email:</label>
+  <input type="text" name="email" autocomplete="off">
+  <label>User Role:</label>
+    <input type="radio" name="role" value="User" checked><label for="User">User</label></div>
+    <input type="radio" name="role" value="Contributor" checked><label for="Contributor">Contributor</label></div>
+    <input type="radio" name="role" value="Admin" checked><label for="Admin">Admin (Do Not Use)</label></div>
+  <input type="submit" value="Next: Ingredients">
+</form>
+
+<%- include('../partials/footer') %>

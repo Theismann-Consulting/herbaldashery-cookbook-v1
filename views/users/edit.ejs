@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+
+<form id="new-form" action="/users/<%= user._id %>?_method=PUT" method="POST">
+  <label>Name:</label>
+  <input type="text" name="name" value="<%= user.name %>" autocomplete="off">
+  <label>Email:</label>
+  <input type="text" name="email" value="<%= user.email %>" autocomplete="off">
+  <label>User Role: Currently <%= user.role %> (Please Reselect Role Below)</label>
+    <input type="radio" name="role" value="User"><label for="User">User</label></div>
+    <input type="radio" name="role" value="Contributor" ><label for="Contributor">Contributor</label></div>
+    <input type="radio" name="role" value="Admin" ><label for="Admin">Admin (Do Not Use)</label></div>
+  <input type="submit" value="Next: Ingredients">
+</form>
+
+<%- include('../partials/footer') %>

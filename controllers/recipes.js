@@ -16,7 +16,7 @@ function index(req, res) {
   Recipe.find(modelQuery)
   .exec(function(err, recipes) {
     if (err) return next(err);
-  Recipe.find({}, function (err, recipes){
+      Recipe.find({}, function (err, recipes){
         res.render('recipes/index', {
           recipes,
         contributor: req.user,
