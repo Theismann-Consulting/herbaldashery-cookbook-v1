@@ -22,7 +22,7 @@ function index(req, res, next) {
 
 function show(req, res) {
     User.findById(req.params.id, function(err, user) {
-          res.render('user/show', { 
+          res.render('users/show', { 
           user,
         });
     });
