@@ -24,6 +24,7 @@ function show(req, res) {
     User.findById(req.params.id, function(err, user) {
           res.render('users/show', { 
           user,
+          contributor: req.user,
         });
     });
 };
@@ -65,6 +66,8 @@ function edit(req, res){
 
   function deleteUser(req, res, next) {
     User.findByIdAndDelete(req.params.id, function(err) {
-        res.render('user/index');
+        res.render('user/index', {
+            contributor: req.user,
+        });
     });
   };
