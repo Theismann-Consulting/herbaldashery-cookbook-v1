@@ -63,7 +63,6 @@ function create(req, res) {
 
 function deleteRecipe(req, res, next) {
   Recipe.findByIdAndDelete(req.params.id, function(err, r) {
-    console.log(r);
     Ingredient.updateMany({recipe: r}, {$pull: {recipe: r._id}},
       function(err, i){
         next();

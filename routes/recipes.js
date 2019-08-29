@@ -4,13 +4,13 @@ const recipesCtrl = require('../controllers/recipes');
 const ingredientsCtrl = require('../controllers/ingredients');
 
 
-router.get('/', recipesCtrl.index);
-router.get('/new', recipesCtrl.new);
-router.get('/:id', recipesCtrl.show);
-router.get('/:id/edit', recipesCtrl.edit)
-router.post('/', recipesCtrl.create);
-router.put('/:id', recipesCtrl.update)
-router.delete('/:id', recipesCtrl.delete, ingredientsCtrl.clean);
+router.get('/', isLoggedIn, recipesCtrl.index);
+router.get('/new', isContributor, recipesCtrl.new);
+router.get('/:id', isLoggedIn, recipesCtrl.show);
+router.get('/:id/edit', isContributor, recipesCtrl.edit)
+router.post('/', isContributor, recipesCtrl.create);
+router.put('/:id', isContributor, recipesCtrl.update)
+router.delete('/:id', isAdmin, recipesCtrl.delete, ingredientsCtrl.clean);
 
 
 function isLoggedIn(req, res, next) {

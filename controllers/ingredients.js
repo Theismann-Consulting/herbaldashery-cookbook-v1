@@ -11,21 +11,16 @@ module.exports = {
 
 
 function create(req, res) {
-  console.log(req.body);
     const ingredient = new Ingredient(req.body);
     ingredient.contributor = req.user;
-    console.log(ingredient);
     ingredient.save(function(err, i) {
-      console.log(i);
       if (err) {return res.render('recipes/ingredients/index', {
         contributor: req.user
       })};
       Recipe.findById(ingredient.recipe, function(err, recipe){
         recipe.ingredients.push(i);
         recipe.save(function(err, r){
-          console.log(r);
           Ingredient.find({ recipe: r._id }, function(err, ingredients){
-            console.log(ingredients);
             res.render('recipes/ingredients/index',{
               contributor: req.user,
               recipe,
