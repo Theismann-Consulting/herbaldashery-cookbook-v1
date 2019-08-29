@@ -6,6 +6,7 @@ module.exports = {
     delete: deleteIngredient,
     edit,
     update,
+    clean,
 };
 
 
@@ -37,16 +38,10 @@ function create(req, res) {
 };
 
 function deleteIngredient(req, res, next) {
-  console.log(req.params.id);
   Ingredient.findByIdAndDelete(req.params.id, function(err, i) {
-    console.log(err);
-    console.log(i);
     Recipe.updateMany({ingredients: i}, {$pull: {ingredients: i._id}}, function(err){
       Recipe.findById(i.recipe, function(err, recipe){
-        console.log(err);
-        console.log(recipe);
         Ingredient.find({ recipe: recipe._id }, function(err, ingredients){
-          recipe.ingredients.splice()
           res.render('recipes/ingredients/index', {
             contributor: req.user,
             recipe,
@@ -57,6 +52,12 @@ function deleteIngredient(req, res, next) {
     });
   });
 };
+
+function clean(req, res, next){
+  Ingredient.deleteMany({recipes: ''}, function (err) {
+    res.redirect('/recipes');
+  });
+}
 
 function edit(req, res){
   Ingredient.findById({ _id: req.params.id }, function(err, ingredient){

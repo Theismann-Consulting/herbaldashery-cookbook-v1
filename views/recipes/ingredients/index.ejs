@@ -17,7 +17,7 @@
     <% ingredients.forEach(function(i) { %>
     <tr>
       <form id="ingredientsForm" action="/ingredients/<%= i._id %>?_method=DELETE" method="POST">
-        <td><%= i.measurement %></td>
+        <td><%= i.amount %></td>
         <td><%= i.name %></td>
         <td><input type="submit" value="Delete"></td>
       </form>

@@ -62,9 +62,12 @@ function create(req, res) {
 };
 
 function deleteRecipe(req, res, next) {
-  console.log(req.params.id);
-  Recipe.deleteOne({ _id: req.params.id}, function(err) {
-    res.redirect('/recipes');
+  Recipe.findByIdAndDelete(req.params.id, function(err, r) {
+    Ingredient.updateMany({recipes: r}, {$pull: {recipes: r._id}},
+      function(err){
+        next();
+        
+    });
   });
 };
 
