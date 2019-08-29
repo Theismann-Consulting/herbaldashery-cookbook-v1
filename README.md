@@ -22,4 +22,7 @@ Recipes can be created by contributors for users to view.
 Please do NOT delete any user account with an @herbaldashery.com email address.  This is an app in development for a client and they are testing the app as well.
 
 ## Screenshots
-![Login](/public/images/cookbook_home.png)
+![Login](https://github.com/atheismann/herbaldashery-cookbook/blob/development/public/images/cookbook_home.png)
+![Add User](https://github.com/atheismann/herbaldashery-cookbook/blob/development/public/images/cookbook_adduser.png)
+![Recipes Index](https://github.com/atheismann/herbaldashery-cookbook/blob/development/public/images/cookbook_recipes.png)
+![Add Recipe](https://github.com/atheismann/herbaldashery-cookbook/blob/development/public/images/cookbook_addrecipe.png)
