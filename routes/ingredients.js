@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const ingredientsCtrl = require('../controllers/ingredients');
 
-router.post('/', isLoggedin, isContributor, ingredientsCtrl.create);
-router.put('/:id', isLoggedin, isContributor, ingredientsCtrl.update)
+router.post('/', isLoggedIn, isContributor, ingredientsCtrl.create);
+router.put('/:id', isLoggedIn, isContributor, ingredientsCtrl.update)
 router.delete('/:id', isLoggedIn, isAdmin, ingredientsCtrl.delete);
 
 function isLoggedIn(req, res, next) {
