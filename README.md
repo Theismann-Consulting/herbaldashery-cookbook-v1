@@ -6,6 +6,8 @@
 
 [ERD](https://www.lucidchart.com/documents/view/a65e26ed-48ac-495c-9ff5-c42cf71e291d/0_0)
 
+[Herbaldashery Cookbook Website](https://herbaldashery-cookbook.herokuapp.com)
+
 ### User Accounts
 The system requires an account to be created prior to login.  Please use the create account button on the home page to create your account.  Once an account is created, you can login normally.  All user accounts require a Google hosted email address.
 
