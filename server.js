@@ -43,6 +43,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/recipes', recipesRouter);
 app.use('/ingredients', ingredientsRouter);
+app.use('/recipes/:id/ingredients', ingredientsRouter);
 
 
 /// catch 404 and forwarding to error handler

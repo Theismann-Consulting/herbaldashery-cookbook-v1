@@ -7,9 +7,9 @@ const ingredientsCtrl = require('../controllers/ingredients');
 router.get('/', isLoggedIn, recipesCtrl.index);
 router.get('/new', isContributor, recipesCtrl.new);
 router.get('/:id', isLoggedIn, recipesCtrl.show);
-router.get('/:id/edit', isContributor, recipesCtrl.edit)
+router.get('/:id/edit', isContributor, recipesCtrl.edit);
 router.post('/', isContributor, recipesCtrl.create);
-router.put('/:id', isContributor, recipesCtrl.update)
+router.put('/:id', isContributor, recipesCtrl.update);
 router.delete('/:id', isAdmin, recipesCtrl.delete, ingredientsCtrl.clean);
 
 
