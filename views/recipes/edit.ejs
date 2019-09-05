@@ -39,7 +39,7 @@ const quill = new Quill('#editor', {
   theme: 'snow',
 });
 
-quill.setContents(<%- recipe.instructions %>);
+quill.setContents( <%- recipe.instructions %> );
 
 const form = document.querySelector('form');
     form.onsubmit = function() {

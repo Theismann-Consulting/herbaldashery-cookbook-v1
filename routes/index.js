@@ -39,6 +39,12 @@ router.get('/login_failure', function(req, res){
     });
 });
 
+router.get('/privacy-policy', function(req, res){
+    res.render('privacypolicy', {
+        contributor: req.user,
+    });
+});
+
 
 //Begin Facebook Auth
 
