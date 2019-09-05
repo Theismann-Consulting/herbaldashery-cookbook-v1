@@ -10,7 +10,7 @@ passport.use(new FacebookStrategy({
     profileFields: ['id', 'displayName', 'email', 'picture']
   },
   function(accessToken, refreshToken, profile, done) {
-      console.log(profilel);
+      console.log(profile);
     User.findOne({ 'email': profile._json.email }, function(err, user) {
         if (err) return done(err);
         if (user) {
