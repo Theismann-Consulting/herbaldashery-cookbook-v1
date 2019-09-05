@@ -21,6 +21,10 @@ const recipeSchema = new mongoose.Schema({
       default: 'Unassigned',
     }],
     description: String,
+    mealPlan: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    }],
 }, {
     timestamps: true,
 });

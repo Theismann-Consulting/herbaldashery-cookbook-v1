@@ -21,6 +21,7 @@
             <li><a href="/">Home</a></li>
             <% if (contributor) { %>
               <li><a href="/recipes/">Recipes</a></li>
+              <li><a href="/mealplans/">Meal Plans</a></li>
                 <% if (contributor.role && contributor.role !== "User"){ %>
                   <li><a href="/recipes/new">Contribute Recipe</a></li>
                 <% }; %>

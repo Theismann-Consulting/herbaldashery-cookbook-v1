@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+
+<label>Meal Plan Name:</label>
+<%= mealPlan.name %><br>
+<label>Description:</label>
+<p>
+  <%= mealPlan.description %>
+</p>
+<label>Recipes:</label>
+<% if (!recipes || recipes !== undefined) { %>
+    <% recipes.forEach(function(r) { %>
+        <table>
+            <form id="recipesForm" action="/mealplans/<%= mealPlan._id%>/recipes/<%= r._id %>?_method=DELETE" method="POST">
+                <tr>
+                    <td>
+                        <%= r.name %>
+                    </td>
+                    <td><input type="submit" class="btn-small left" value="X" /></td>
+                </tr>
+            </form>
+        </table>
+        <% }); %>
+            <% }; %>
+            <form id="add-user-to-mealplan" action="/mealplans/<%= mealPlan._id%>/users" method="POST">
+              <select name="recipe">
+                <%- users.map(u => `<option value="${u._id}">${u.name}</option>`).join('') %>
+              </select>
+              <button type="submit">Assign Meal Plan to User</button>
+            </form>
+            <label>Users:</label>
+<a class="btn-small left" href="/mealplans/<%= mealPlan._id %>">Finished</a>
+
+<%- include('../partials/footer') %>
