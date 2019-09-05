@@ -17,7 +17,6 @@
   <input type="hidden" name="instructionsHtml">
   <input type="hidden" name="instructionsString">
   <div id="editor">
-    <%= recipe.instructionsString %>
   </div>
   <!-- <label>Ingredients:</label>
   <input type="text" name="measurement">
@@ -40,6 +39,7 @@ const quill = new Quill('#editor', {
   theme: 'snow',
 });
 
+quill.setContents(<%- recipe.instructions %>);
 
 const form = document.querySelector('form');
     form.onsubmit = function() {
