@@ -11,8 +11,27 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
       console.log(profile);
-    User.findOne({ 'email': profile._json.email }, function(err, user) {
-        if (err) return done(err);
+      User.findOne({ 'facebookId': profile.id }, function(err, user) {
+        if (err) {
+        User.findOne({ 'email': profile._json.email }, function(err, user){
+            if (err) return cb(err);
+            if (user) {
+                if (!user.facebookId) {
+                    user.name = profile.displayName,
+                    user.facebookId = profile.id,
+                    user.avatar = profile.photos[0].value;
+                    user.save(function(err) {
+                        return done(null, user);
+                    });
+                } else {
+                    return done(null, user);
+                }
+            } else {
+                return done(null);
+            }
+        });
+        return done(err);
+        };
         if (user) {
             if (!user.facebookId) {
                 user.name = profile.displayName,
@@ -26,9 +45,9 @@ passport.use(new FacebookStrategy({
             }
         } else {
             return done(null);
-        }
+        };  
     });
-  }
+}
 ));
 
 passport.use(new GoogleStrategy({
@@ -37,12 +56,31 @@ passport.use(new GoogleStrategy({
         callbackURL: process.env.GOOGLE_CALLBACK
     },
     function(accessToken, refreshToken, profile, cb) {
-        User.findOne({ 'email': profile._json.email }, function(err, user) {
-            if (err) return cb(err);
+        User.findOne({ 'googleId': profile.id }, function(err, user) {
+            if (err) {
+            User.findOne({ 'email': profile._json.email }, function(err, user){
+                if (err) return cb(err);
+                if (user) {
+                    if (!user.googleId) {
+                        user.name = profile.displayName,
+                        user.facebookId = profile.id,
+                        user.avatar = profile.photos[0].value;
+                        user.save(function(err) {
+                            return cb(null, user);
+                        });
+                    } else {
+                        return cb(null, user);
+                    }
+                } else {
+                    return cb(null);
+                }
+            });
+            return cb(err);
+            };
             if (user) {
-                if (!user.googleId) {
+                if (!user.facebookId) {
                     user.name = profile.displayName,
-                    user.googleId = profile.id,
+                    user.facebookId = profile.id,
                     user.avatar = profile.photos[0].value;
                     user.save(function(err) {
                         return cb(null, user);
@@ -52,7 +90,7 @@ passport.use(new GoogleStrategy({
                 }
             } else {
                 return cb(null);
-            }
+            };  
         });
     }
 ));
