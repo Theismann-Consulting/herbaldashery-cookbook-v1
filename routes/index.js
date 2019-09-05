@@ -8,9 +8,11 @@ router.get('/', function(req, res){
     });
 });
 
+//Google Auth
 router.get('/auth/google', passport.authenticate(
     'google', { scope: ['profile', 'email'] }
 ));
+
 
 router.get('/oauth2callback', passport.authenticate(
     'google', {
@@ -18,6 +20,13 @@ router.get('/oauth2callback', passport.authenticate(
         failureRedirect: '/login_failure'
     }
 ));
+//End Google Auth
+
+router.get('/login', function(req, res){
+    res.render('login', {
+        contributor: req.user,
+    });
+});
 
 router.get('/logout', function(req, res) {
     req.logout();
@@ -29,5 +38,21 @@ router.get('/login_failure', function(req, res){
         contributor: req.user,
     });
 });
+
+
+//Begin Facebook Auth
+
+router.get('/auth/facebook', passport.authenticate(
+    'facebook', { scope: ['public_profile', 'email'] }
+));
+
+router.get('/auth/facebook/callback',
+  passport.authenticate(
+    'facebook', { 
+        successRedirect: '/',
+        failureRedirect: '/login_failure' 
+    }
+));
+
 
 module.exports = router;
