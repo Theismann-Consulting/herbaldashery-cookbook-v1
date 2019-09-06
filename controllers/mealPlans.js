@@ -5,7 +5,7 @@ const MealPlan = require('../models/mealPlan');
 module.exports = {
     index,
     show,
-    new: newRecipe,
+    new: newMealPlan,
     create,
     delete: deleteMealPlan,
     edit,
@@ -50,7 +50,7 @@ function show(req, res) {
   });
 };
 
-function newRecipe(req, res) {
+function newMealPlan(req, res) {
     res.render('mealplans/new', {
         contributor: req.user,
       });

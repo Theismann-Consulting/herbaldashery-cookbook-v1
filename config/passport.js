@@ -12,7 +12,7 @@ passport.use(new FacebookStrategy({
   function(accessToken, refreshToken, profile, done) {
       console.log(profile);
       User.findOne({ 'facebookId': profile.id }, function(err, user) {
-        if (err) {
+        if (!user) {
         User.findOne({ 'email': profile._json.email }, function(err, user){
             if (err) return cb(err);
             if (user) {
@@ -57,40 +57,26 @@ passport.use(new GoogleStrategy({
     },
     function(accessToken, refreshToken, profile, cb) {
         User.findOne({ 'googleId': profile.id }, function(err, user) {
-            if (err) {
-            User.findOne({ 'email': profile._json.email }, function(err, user){
-                if (err) return cb(err);
-                if (user) {
-                    if (!user.googleId) {
-                        user.name = profile.displayName,
-                        user.facebookId = profile.id,
-                        user.avatar = profile.photos[0].value;
-                        user.save(function(err) {
+            if (!user) {
+                User.findOne({ 'email': profile._json.email }, function(err, user){
+                    if (err) return cb(err);
+                    if (user) {
+                        if (!user.googleId) {
+                            user.name = profile.displayName,
+                            user.googleId = profile.id,
+                            user.avatar = profile.photos[0].value;
+                            user.save(function(err) {
+                                return cb(null, user);
+                            });
+                        } else {
                             return cb(null, user);
-                        });
+                        }
                     } else {
-                        return cb(null, user);
+                        return cb(null);
                     }
-                } else {
-                    return cb(null);
-                }
-            });
-            return cb(err);
+                });
+                return cb(err);
             };
-            if (user) {
-                if (!user.facebookId) {
-                    user.name = profile.displayName,
-                    user.facebookId = profile.id,
-                    user.avatar = profile.photos[0].value;
-                    user.save(function(err) {
-                        return cb(null, user);
-                    });
-                } else {
-                    return cb(null, user);
-                }
-            } else {
-                return cb(null);
-            };  
         });
     }
 ));
