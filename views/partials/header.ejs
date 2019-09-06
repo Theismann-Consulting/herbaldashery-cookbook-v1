@@ -18,7 +18,10 @@
       <div class="nav-wrapper">
         <a href="/" class="brand-logo left">Herbaldashery Cookbook</a>
         <ul class="right">
+            <% if (contributor) { %>
+              <li>Hi, <%= contributor.name %></li>
             <li><a href="/">Home</a></li>
+            <% }; %>
             <% if (contributor) { %>
               <li><a href="/recipes/">Recipes</a></li>
               <li><a href="/mealplans/">Meal Plans</a></li>
