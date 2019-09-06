@@ -22,9 +22,6 @@
             <% if (contributor) { %>
               <li><a href="/recipes/">Recipes</a></li>
               <li><a href="/mealplans/">Meal Plans</a></li>
-                <% if (contributor.role && contributor.role !== "User"){ %>
-                  <li><a href="/recipes/new">Contribute Recipe</a></li>
-                <% }; %>
               <li><a href="/users/<%= contributor._id %>">My Info</a></li>
                 <% if (contributor.role === "Admin"){ %>
                   <li><a href="/users">Users</a></li>

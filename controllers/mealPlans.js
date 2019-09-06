@@ -1,5 +1,5 @@
 const Recipe = require('../models/recipe');
-const Ingredient = require('../models/ingredient');
+const User = require('../models/user');
 const MealPlan = require('../models/mealPlan');
 
 module.exports = {
@@ -12,6 +12,9 @@ module.exports = {
     update,
     addRecipe,
     removeRecipe,
+    addUser,
+    showUsers,
+    removeUser,
 };
 
 function index(req, res) {
@@ -20,10 +23,13 @@ function index(req, res) {
   .exec(function(err, mealPlans) {
     if (err) return next(err);
       MealPlan.find({}, function (err, mealPlans){
-        res.render('mealplans/index', {
-          mealPlans,
-        contributor: req.user,
-        name: req.query.name,
+        Recipe.find({ mealPlans: mealPlans._id}, function(err,recipes){
+          res.render('mealplans/index', {
+            recipes,
+            mealPlans,
+          contributor: req.user,
+          name: req.query.name,
+        });
       });
     });
   });
@@ -32,13 +38,16 @@ function index(req, res) {
 function show(req, res) {
     MealPlan.findById(req.params.id, function(err, mealPlan) {
       Recipe.find({ mealPlan: mealPlan._id }, function(err, recipes){
+        User.find({mealPlansAssigned: mealPlan._id}, function(err, users){
           res.render('mealplans/show', { 
           recipes,
           contributor: req.user,
           mealPlan,
+          users,
          });
       });
     });
+  });
 };
 
 function newRecipe(req, res) {
@@ -49,7 +58,6 @@ function newRecipe(req, res) {
 
 function create(req, res) {
     const mealPlan = new MealPlan(req.body);
-    mealPlan.owner = req.user;
     mealPlan.save(function(err, mealPlan) {
         if (err) {return res.render('mealplans/new', {
           contributor: req.user
@@ -68,7 +76,6 @@ function create(req, res) {
 };
 
 function removeRecipe(req, res, next) {
-
   MealPlan.findByIdAndUpdate(req.params.id, {$pull: {recipes: req.body.recipeId}}, {new: true}, function(err, mealPlan) {
     Recipe.findByIdAndUpdate(req.body.recipeId, {$pull: { mealPlan: mealPlan._id} }, {new: true}, function(err, recipe){
       Recipe.find({}, function(err, allRecipes){
@@ -135,7 +142,56 @@ function addRecipe(req, res) {
 function deleteMealPlan(req, res, next) {
   MealPlan.findByIdAndDelete(req.params.id, function(err, mealPlan) {
     Recipe.updateMany({mealPlan: mealPlan}, {$pull: {mealPlan: mealPlan._id}}, function(err){
-      res.redirect('/mealplans');
+      User.updateMany({mealPlansAssigned: mealPlan}, {$pull: {mealPlansAssigned: mealPlan._id}}, function(err){
+        User.updateMany({mealPlansOwned: mealPlan}, {$pull: {mealPlansOwned: mealPlan._id}}, function(err){
+          res.redirect('/mealplans');
+        });
+      });
+    });
+  });
+};
+
+function showUsers(req, res) {
+  User.findById(req.user, function(err, user){
+    MealPlan.findById(req.params.id, function(err, mealPlan){
+      User.find({}, function(err, allUsers){
+        User.find({ mealPlansAssigned: mealPlan._id }, function(err, users){
+          Recipe.find({}, function(err, allRecipes){
+            Recipe.find({ mealPlan: mealPlan._id }, function(err, recipes){
+              res.render('mealplans/addUser',{
+                contributor: req.user,
+                mealPlan,
+                users,
+                allUsers,
+                recipes,
+                allRecipes,
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+};
+
+function addUser(req, res) {
+  User.findById(req.body.user, function(err, user){
+    MealPlan.findById(req.params.id, function(err, mealPlan){
+      user.mealPlansAssigned.push(mealPlan);
+      user.save(function(err){
+        mealPlan.assignedUsers.push(user);
+        mealPlan.save(function(err, m){
+          res.redirect(`/mealplans/${mealPlan._id}/users`);
+        })
+      });
+    });
+  });
+};
+
+function removeUser(req, res, next) {
+  MealPlan.findByIdAndUpdate(req.params.id, {$pull: {assignedUsers: req.body.userId}}, {new: true}, function(err, mealPlan) {
+    User.findByIdAndUpdate(req.body.userId, {$pull: { mealPlansAssigned: mealPlan._id} }, {new: true}, function(err, user){
+      res.redirect(`/mealplans/${mealPlan._id}/users`);
     });
   });
 };

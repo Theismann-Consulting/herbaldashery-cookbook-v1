@@ -12,7 +12,15 @@ const userSchema = new mongoose.Schema({
     active: {
         type: Boolean,
         default: true,
-    }
+    },
+    mealPlansOwned: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Meal Plans',
+      }],
+    mealPlansAssigned: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Meal Plans',
+      }],
 }, {
     timestamps: true
 });

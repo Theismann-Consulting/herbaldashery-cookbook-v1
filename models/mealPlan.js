@@ -4,7 +4,7 @@ const mealPlanSchema = new mongoose.Schema({
     name: String,
     recipes: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Ingredient',
+      ref: 'Recipe',
     }],
     owner: {
       type: mongoose.Schema.Types.ObjectId,
