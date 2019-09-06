@@ -14,7 +14,12 @@
                 <div>
                     <img class="responsive-img circle" src="<%= user.avatar %>">
                 </div>
-                <span class="badge blue-grey lighten-1 white-text"><%= user.role %></span>
+                <span class="badge blue-grey lighten-1 white-text">
+                    <%if (user.active === false){ %>
+                        In-Active<br/>
+                    <% } else { %>
+                    <%= user.role %>
+                    <% }; %></span>
                 <h3>
                     <%= user.name %>
                 </h3>

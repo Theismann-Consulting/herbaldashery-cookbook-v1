@@ -12,6 +12,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const recipesRouter = require('./routes/recipes');
 const ingredientsRouter = require('./routes/ingredients');
+const mealPlansRouter = require('./routes/mealPlans');
 
 require('dotenv').config();
 
@@ -44,6 +45,7 @@ app.use('/users', usersRouter);
 app.use('/recipes', recipesRouter);
 app.use('/ingredients', ingredientsRouter);
 app.use('/recipes/:id/ingredients', ingredientsRouter);
+app.use('/mealplans', mealPlansRouter);
 
 
 /// catch 404 and forwarding to error handler
