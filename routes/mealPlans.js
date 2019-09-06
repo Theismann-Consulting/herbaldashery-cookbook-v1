@@ -3,18 +3,18 @@ const router = express.Router();
 const mealPlansCtrl = require('../controllers/mealPlans');
 
 
-router.get('/', mealPlansCtrl.index);
-router.get('/new', mealPlansCtrl.new);
-router.get('/:id', mealPlansCtrl.show);
-router.get('/:id/edit', mealPlansCtrl.edit);
-router.get('/:id/users', mealPlansCtrl.showUsers);
-router.post('/', mealPlansCtrl.create);
-router.post('/:id/recipes', mealPlansCtrl.addRecipe);
-router.post('/:id/users', mealPlansCtrl.addUser);
-router.put('/:id', mealPlansCtrl.update);
-router.delete('/:id', mealPlansCtrl.delete);
-router.delete('/:id/recipes/', mealPlansCtrl.removeRecipe);
-router.delete('/:id/users', mealPlansCtrl.removeUser);
+router.get('/', isLoggedIn, mealPlansCtrl.index);
+router.get('/new', isLoggedIn, mealPlansCtrl.new);
+router.get('/:id', isLoggedIn, mealPlansCtrl.show);
+router.get('/:id/edit', isLoggedIn, mealPlansCtrl.edit);
+router.get('/:id/users', isLoggedIn, isAdmin, mealPlansCtrl.showUsers);
+router.post('/', isLoggedIn, mealPlansCtrl.create);
+router.post('/:id/recipes', isLoggedIn, mealPlansCtrl.addRecipe);
+router.post('/:id/users', isLoggedIn, isAdmin, mealPlansCtrl.addUser);
+router.put('/:id', isLoggedIn, mealPlansCtrl.update);
+router.delete('/:id', isLoggedIn, mealPlansCtrl.delete);
+router.delete('/:id/recipes/', isLoggedIn, mealPlansCtrl.removeRecipe);
+router.delete('/:id/users', isLoggedIn, isAdmin, mealPlansCtrl.removeUser);
 
 
 function isLoggedIn(req, res, next) {
