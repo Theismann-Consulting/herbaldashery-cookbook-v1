@@ -31,12 +31,14 @@
           <% }); %>
         </div>
       <div class="col s6 m5 l4">
+        <% if (contributor.role === 'Admin'){ %>
           <label>Users:</label><br />
-<% if (!users || users !== undefined) { %>
-  <% users.forEach(function(u) { %>
-    <%= u.name %><input type="hidden" name="recipeId" value="<%= u._id %>"/><br />
-  <% }); %>
-<% }; %>
+          <% if (!users || users !== undefined) { %>
+            <% users.forEach(function(u) { %>
+              <%= u.name %><input type="hidden" name="recipeId" value="<%= u._id %>"/><br />
+            <% }); %>
+          <% }; %>
+        <% }; %>
       </div>
     </div>
 

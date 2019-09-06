@@ -13,24 +13,24 @@ passport.use(new FacebookStrategy({
       console.log(profile);
       User.findOne({ 'facebookId': profile.id }, function(err, user) {
         if (!user) {
-        User.findOne({ 'email': profile._json.email }, function(err, user){
-            if (err) return cb(err);
-            if (user) {
-                if (!user.facebookId) {
-                    user.name = profile.displayName,
-                    user.facebookId = profile.id,
-                    user.avatar = profile.photos[0].value;
-                    user.save(function(err) {
+            User.findOne({ 'email': profile._json.email }, function(err, user){
+                if (err) return cb(err);
+                if (user) {
+                    if (!user.facebookId) {
+                        user.name = profile.displayName,
+                        user.facebookId = profile.id,
+                        user.avatar = profile.photos[0].value;
+                        user.save(function(err) {
+                            return done(null, user);
+                        });
+                    } else {
                         return done(null, user);
-                    });
+                    }
                 } else {
-                    return done(null, user);
+                    return done(null);
                 }
-            } else {
-                return done(null);
-            }
-        });
-        return done(err);
+            });
+            return done(err);
         };
         if (user) {
             if (!user.facebookId) {
@@ -77,6 +77,20 @@ passport.use(new GoogleStrategy({
                 });
                 return cb(err);
             };
+            if (user) {
+                if (!user.googleId) {
+                    user.name = profile.displayName,
+                    user.googleId = profile.id,
+                    user.avatar = profile.photos[0].value;
+                    user.save(function(err) {
+                        return cb(null, user);
+                    });
+                } else {
+                    return cb(null, user);
+                }
+            } else {
+                return cb(null);
+            };  
         });
     }
 ));
