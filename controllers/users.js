@@ -59,6 +59,7 @@ function edit(req, res){
   }
 
   function update(req, res) {
+    console.log(req.body);
     User.findByIdAndUpdate({ _id: req.params.id }, req.body, function(err, user){
         res.redirect(`/users/${user._id}`);
     });

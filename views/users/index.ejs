@@ -16,7 +16,12 @@
                                 <%= user.email %>
                             </p>
                             <div class="card-action">
-                                <span class="badge blue-grey lighten-1 white-text"><%= user.role %></span>
+                                <span class="badge blue-grey lighten-1 white-text">
+                                    <%if (user.active === false){ %>
+                                        In-Active<br/>
+                                    <% } else { %>
+                                    <%= user.role %>
+                                    <% }; %></span>
                                 <a href="/users/<%= user._id %>" class="btn-small">View User</a>
                             </div>
                         </div>
